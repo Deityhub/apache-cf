@@ -1,6 +1,10 @@
 # Apache Web Server - AWS Cloudformation
 
-In this project, will deploy web servers for a highly available web app using CloudFormation.
+This template deploys a VPC, with a pair of public and private subnets spread 
+across two Availabilty Zones. It deploys an Internet Gateway, with a default 
+route on the public subnets. It deploys a pair of NAT Gateways (one in each AZ), 
+and default routes for them in the private subnets. And finally the web server will be deployed
+in each of the private subnets and each of the availability zones to ensure availability.
 
 ## Template Usage
 1. Make the scripts executable
