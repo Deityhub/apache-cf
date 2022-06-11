@@ -1,3 +1,11 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: >
+    Jude Ojini |
+    This template deploys a VPC, with a pair of public and private subnets spread 
+    across two Availabilty Zones. It deploys an Internet Gateway, with a default 
+    route on the public subnets. It deploys a pair of NAT Gateways (one in each AZ), 
+    and default routes for them in the private subnets. And finally the web server will be deployed
+    in each of the private subnets and each of the availability zones to ensure availability.
 Parameters:
   EnvironmentName:
     Type: String
@@ -30,7 +38,6 @@ Parameters:
     Type: String
     Description: Amazon EC2 instance type for the instances
     Default: t3.small
-
 Resources:
   VPC:
     Type: AWS::EC2::VPC
@@ -222,7 +229,7 @@ Resources:
           sudo apt-get install apache2 -y
           sudo systemctl start apache2.service
           cd /var/www/html
-          echo "It works! Udagram, Udacity" > index.html
+          echo "Server running now!!!" > index.html
   WebAppAutoScalingGroup:
     Type: AWS::AutoScaling::AutoScalingGroup
     Properties:
@@ -276,7 +283,6 @@ Resources:
       Protocol: HTTP
       UnhealthyThresholdCount: 5
       VpcId: !Ref VPC
-
 Outputs:
   DNSName:
     Description: The DNS name for the load balancer
